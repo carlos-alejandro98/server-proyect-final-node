@@ -35,7 +35,12 @@ const gameSchema = new mongoose.Schema(
             default: "Active",
             enum: ["Active", "Inactive"],
         }, 
-        mainImage: String,
+        mainImage: {
+            type: String,
+            trim: true,
+            required: true,
+            text: true,
+        },
         gameImages: {
             type: Array 
         },

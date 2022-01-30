@@ -1,19 +1,17 @@
 const express = require("express");
-
 const router = express.Router();
 
 // middlewares
-const { createGame, gamesCount, listAll } = require("../controllers/game");
+const { createGame, gamesCount, listAll, softRemoveGame, removeGame, readGame, updateGame } = require("../controllers/game");
 
 
 // routes-enpoints games
 router.post("/game/add", createGame);
 router.get("/games/total", gamesCount);
 router.get("/games/:count", listAll);
-/*
-router.patch("/game/:slug", removeGame); */ // cambio de estado
-/* router.delete("/game/:slug", removeGame2); 
-router.get("/game/:slug", readGame);
-router.put("/game/:slug", updateGame); */
+router.patch("/game/softDelete/:slug", softRemoveGame);  // cambio de estado
+router.delete("/game/removeGame/:slug", removeGame); 
+router.get("/game/detailsGame/:slug", readGame);
+router.put("/game/updateGame/:slug", updateGame);
 
 module.exports = router;

@@ -29,3 +29,60 @@ exports.listAll = async (req, res) => {
         .exec();
     res.json(games);
 }
+
+exports.softRemoveGame = async (req, res) => {
+    try {
+        const deleted = await Game.findOneAndUpdate(
+            {
+                slug: req.params.slug,
+            },
+            { status: "Inactive" },
+            { new: true }
+        ).exec();
+        res.json(deleted);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Product deleted failed");
+    }
+}
+
+exports.removeGame = async (req, res) => {
+    try {
+        const deleted = await Game.findOneAndRemove({
+            slug: req.params.slug,
+        }).exec();
+        res.json(deleted);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Product delete failed");
+    }
+}
+
+exports.readGame = async (req, res) => {
+    const game = await Game.findOne({ 
+        slug: req.params.slug, 
+        status: "Active" 
+    }).exec();
+    res.json(game); 
+}
+
+exports.updateGame = async (req, res) => {
+    try {
+        if(req.body.title){
+            req.body.slug = slugify(req.body.title);
+        }
+        const updated = await Game.findOneAndUpdate(
+            { slug: req.params.slug },
+            req.body,
+            { new: true }
+        ).exec();
+        res.json(updated);
+    } catch (err) {
+        console.log("Product Update Error -----> ", err);
+        res.status(400).json({
+            err: err.message,
+            code: err.code,
+        });
+        // return res.status(400).send("Product update failed");
+    }
+}
