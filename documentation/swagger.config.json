@@ -10,6 +10,10 @@
                 "name": "Api Support",
                 "url": "https://www.linkedin.com/in/carlos-abarca-calderon-716432148/",
                 "email": "carlos.alejandro1998@icloud.com"
+            },
+            "license": {
+                "name": "MIT",
+                "url": "https://opensource.org/licenses/MIT"
             }
         },
         "servers": [
