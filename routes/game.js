@@ -7,6 +7,29 @@ const { createGame, gamesCount, listAll, softRemoveGame, removeGame, readGame, u
 
 // routes-enpoints games
 
+/**
+ * @swagger
+ * /game/add:
+ *   post:
+ *     summary: Create Game
+ *     tags:
+ *       - name: "Game"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Game"
+ *     responses:
+ *       200: 
+ *         description: ok
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Game"
+ *       400:
+ *         description: bad request     
+ */
 router.post("/game/add", createGame);
 
 /**
@@ -109,10 +132,10 @@ router.get("/game/detailsGame/:slug", readGame);
 /**
  * @swagger
  * /game/updateGame/{game}:
- *   put:
+ *   post:
+ *     summary: Update Game
  *     tags:
  *       - name: "Game"
- *     summary: "Update Game"
  *     parameters:
  *       - name: "game"
  *         in: "path"
@@ -121,9 +144,21 @@ router.get("/game/detailsGame/:slug", readGame);
  *         type: "string"
  *         trim: true
  *         text: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Game"
  *     responses:
  *       200: 
- *          description: ok   
+ *         description: ok
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Game"
+ *       400:
+ *         description: bad request     
  */
 router.put("/game/updateGame/:slug", updateGame);
 
@@ -173,7 +208,13 @@ module.exports = router;
  *            trim: true
  *            text: true
  *       example:
- *         name: PC
- *         slug: pc
+ *         title: Valorant
+ *         description: The best game in the world
+ *         genre: Shooter
+ *         url: https://playvalorant.com/
+ *         platform: 61f698533f51274950308a6b
+ *         mainImage: ruta imagen
+ *         gameImages: [] 
+ *         slug: valorant
  *         status: Active      
  */

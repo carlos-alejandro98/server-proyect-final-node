@@ -4,7 +4,29 @@ const router = express.Router();
 // controller-middlewares
 const { createPlatform, getPlatforms } = require("../controllers/platform");
 
-
+/**
+ * @swagger
+ * /platform/add:
+ *   post:
+ *     summary: Create Platform
+ *     tags:
+ *       - name: "Platform"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Platform"
+ *     responses:
+ *       200: 
+ *         description: ok
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Platform"
+ *       400:
+ *         description: bad request     
+ */
 router.post("/platform/add", createPlatform);
 
 /**
