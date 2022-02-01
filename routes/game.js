@@ -210,7 +210,7 @@ module.exports = router;
  *       example:
  *         title: Valorant
  *         description: The best game in the world
- *         genre: Shooter
+ *         genre: 61f878b3e65d1d4670ea47a1
  *         url: https://playvalorant.com/
  *         platform: 61f698533f51274950308a6b
  *         mainImage: ruta imagen

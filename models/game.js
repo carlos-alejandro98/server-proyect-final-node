@@ -24,7 +24,10 @@ const gameSchema = new mongoose.Schema(
             maxlength: 2000,
             text: true,
         },
-        genre: String,
+        genre: {
+            type: ObjectId,
+            ref: "Genre",
+        },
         url: String,
         platform: {
             type: ObjectId,
