@@ -2,10 +2,23 @@ const express = require("express");
 const router = express.Router();
 
 // middlewares
-const { createGame, gamesCount, listAll, softRemoveGame, removeGame, readGame, updateGame } = require("../controllers/game");
+const { getGamesAll, createGame, gamesCount, getGamesByNumber, softRemoveGame, removeGame, readGame, updateGame } = require("../controllers/game");
 
 
 // routes-enpoints games
+
+/**
+ * @swagger
+ * /games:
+ *   get:
+ *     tags:
+ *       - name: "Game"
+ *     summary: "Get Games"
+ *     responses:
+ *       200: 
+ *          description: ok   
+ */
+router.get("/games", getGamesAll);
 
 /**
  * @swagger
@@ -64,7 +77,7 @@ router.get("/games/total", gamesCount);
  *       200: 
  *          description: ok   
  */
-router.get("/games/:count", listAll);
+router.get("/games/:count", getGamesByNumber);
 
 /**
  * @swagger

@@ -4,6 +4,13 @@ const slugify = require("slugify");
 
 // exports middlewares
 
+exports.getGamesAll = async (req, res) => {
+    const game = await Game.find({ 
+        status: "Active" 
+    }).exec();
+    res.json(game); 
+};
+
 exports.createGame = async (req, res) => {
     try {
         console.log(req.body);
@@ -23,7 +30,7 @@ exports.gamesCount = async (req, res) => {
     res.json(total);
 }
 
-exports.listAll = async (req, res) => {
+exports.getGamesByNumber = async (req, res) => {
     let games = await Game.find({ status: "Active" })
         .limit(parseInt(req.params.count))
         .exec();
