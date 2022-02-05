@@ -4,6 +4,8 @@ const router = express.Router();
 // middlewares
 const { getGamesAll, createGame, gamesCount, getGamesByNumber, softRemoveGame, removeGame, readGame, updateGame } = require("../controllers/game");
 
+// middlewares validators
+const { validateCreateGame, validateUpdateGame } = require("../validations/game");
 
 // routes-enpoints games
 
@@ -43,7 +45,7 @@ router.get("/games", getGamesAll);
  *       400:
  *         description: bad request     
  */
-router.post("/game/add", createGame);
+router.post("/game/add", validateCreateGame, createGame);
 
 /**
  * @swagger
