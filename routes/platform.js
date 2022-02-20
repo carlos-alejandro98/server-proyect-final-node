@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 // controller-middlewares
-const { createPlatform, getPlatforms } = require("../controllers/platform");
+const { createPlatform, getPlatforms, updateStatusPlatform } = require("../controllers/platform");
+
+// middlewares validators
+const { validateCreatePlatform, validateUpdatePlatform } = require("../validations/platform");
 
 /**
  * @swagger
@@ -27,7 +30,7 @@ const { createPlatform, getPlatforms } = require("../controllers/platform");
  *       400:
  *         description: bad request     
  */
-router.post("/platform/add", createPlatform);
+router.post("/platform/add", validateCreatePlatform, createPlatform);
 
 /**
  * @swagger
@@ -41,6 +44,30 @@ router.post("/platform/add", createPlatform);
  *          description: ok   
  */
 router.get("/platform/getPlatforms", getPlatforms);
+
+
+
+/**
+ * @swagger
+ * /platform/updateStatus/{platform}:
+ *   patch:
+ *     tags:
+ *       - name: "Platform"
+ *     summary: "Update Status Platform"
+ *     parameters:
+ *       - name: "platform"
+ *         in: "path"
+ *         description: "platform search"
+ *         required: true
+ *         type: "string"
+ *         trim: true
+ *         text: true
+ *     responses:
+ *       200: 
+ *          description: ok   
+ */
+router.patch("/platform/updateStatus/:slug",validateUpdatePlatform, updateStatusPlatform);
+
 
 module.exports = router;   
 

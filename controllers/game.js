@@ -90,6 +90,5 @@ exports.updateGame = async (req, res) => {
             err: err.message,
             code: err.code,
         });
-        // return res.status(400).send("Product update failed");
     }
 }

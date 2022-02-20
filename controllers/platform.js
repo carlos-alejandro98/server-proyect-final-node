@@ -11,6 +11,22 @@ exports.createPlatform = async (req, res) => {
     }
 };
 
+exports.updateStatusPlatform = async (req, res) => {
+    try {
+        const deleted = await Platform.findOneAndUpdate(
+            {
+                slug: req.params.slug,
+            },
+            { status: "Inactive" },
+            { new: true }
+        ).exec();
+        res.json(deleted);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Product deleted failed");
+    }
+}
+
 
 exports.getPlatforms = async (req, res) => {
     const platform = await Platform.find({ 

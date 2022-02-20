@@ -4,8 +4,11 @@ const router = express.Router();
 // middlewares
 const { getGamesAll, createGame, gamesCount, getGamesByNumber, softRemoveGame, removeGame, readGame, updateGame } = require("../controllers/game");
 
+// middlewares security
+const { generateToken } = require("../middlewares/auth");
+
 // middlewares validators
-const { validateCreateGame, validateUpdateGame } = require("../validations/game");
+const { validateCreateGame, validateUpdateGame, validateDeleteGame } = require("../validations/game");
 
 // routes-enpoints games
 
@@ -20,7 +23,7 @@ const { validateCreateGame, validateUpdateGame } = require("../validations/game"
  *       200: 
  *          description: ok   
  */
-router.get("/games", getGamesAll);
+router.get("/games",generateToken, getGamesAll);
 
 /**
  * @swagger
@@ -45,7 +48,7 @@ router.get("/games", getGamesAll);
  *       400:
  *         description: bad request     
  */
-router.post("/game/add", validateCreateGame, createGame);
+router.post("/game/add", generateToken, validateCreateGame, createGame);
 
 /**
  * @swagger
@@ -100,7 +103,7 @@ router.get("/games/:count", getGamesByNumber);
  *       200: 
  *          description: ok   
  */
-router.patch("/game/softDelete/:slug", softRemoveGame);  // cambio de estado
+router.patch("/game/softDelete/:slug",generateToken, validateDeleteGame, softRemoveGame);  // cambio de estado
 
 /**
  * @swagger
@@ -121,7 +124,7 @@ router.patch("/game/softDelete/:slug", softRemoveGame);  // cambio de estado
  *       200: 
  *          description: ok   
  */
-router.delete("/game/removeGame/:slug", removeGame); 
+router.delete("/game/removeGame/:slug",generateToken, validateDeleteGame, removeGame); 
 
 /**
  * @swagger
@@ -175,7 +178,7 @@ router.get("/game/detailsGame/:slug", readGame);
  *       400:
  *         description: bad request     
  */
-router.put("/game/updateGame/:slug", updateGame);
+router.put("/game/updateGame/:slug", generateToken, validateUpdateGame, updateGame);
 
 module.exports = router;
 

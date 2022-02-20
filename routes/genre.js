@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 // controller-middlewares
-const { createGenre, getGenre } = require("../controllers/genre");
+const { createGenre, getGenre, updateStatusGenre } = require("../controllers/genre");
+
+// middlewares validators
+const { validateCreateGenre, validateUpdateGenre } = require("../validations/genre");
 
 /**
  * @swagger
@@ -27,7 +30,7 @@ const { createGenre, getGenre } = require("../controllers/genre");
  *       400:
  *         description: bad request     
  */
-router.post("/genre/add", createGenre);
+router.post("/genre/add", validateCreateGenre, createGenre);
 
 /**
  * @swagger
@@ -41,6 +44,28 @@ router.post("/genre/add", createGenre);
  *          description: ok   
  */
 router.get("/genre/getGenre", getGenre);
+
+
+/**
+ * @swagger
+ * /platform/updateStatus/{genre}:
+ *   patch:
+ *     tags:
+ *       - name: "Genre"
+ *     summary: "Update Status Genre"
+ *     parameters:
+ *       - name: "Genre"
+ *         in: "path"
+ *         description: "genre search"
+ *         required: true
+ *         type: "string"
+ *         trim: true
+ *         text: true
+ *     responses:
+ *       200: 
+ *          description: ok   
+ */
+ router.patch("/genre/updateStatus/:slug",validateUpdateGenre, updateStatusGenre);
 
 module.exports = router;   
 

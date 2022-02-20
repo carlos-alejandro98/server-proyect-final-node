@@ -11,6 +11,21 @@ exports.createGenre = async (req, res) => {
     }
 };
 
+exports.updateStatusGenre = async (req, res) => {
+    try {
+        const deleted = await Genre.findOneAndUpdate(
+            {
+                slug: req.params.slug,
+            },
+            { status: "Inactive" },
+            { new: true }
+        ).exec();
+        res.json(deleted);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Genre deleted failed");
+    }
+}
 
 exports.getGenre = async (req, res) => {
     const genre = await Genre.find({ 

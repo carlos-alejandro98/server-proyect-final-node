@@ -1,6 +1,6 @@
 const express = require("express");
 const connectDB = require("./database");
-const morgan = require("morgan");
+//const morgan = require("morgan");
 const cors = require("cors"); // Protocolo de conexión segura
 const { readdirSync } = require("fs"); // Lectura dinamica de directorios
 const swaggerUI = require("swagger-ui-express");
@@ -15,7 +15,7 @@ const app = express();
 connectDB();
 
 // middlewares-server
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: false }));
 const swaggerDocs = swaggerJsdoc(swaggerConfig);
