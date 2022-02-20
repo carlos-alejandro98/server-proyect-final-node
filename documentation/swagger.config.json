@@ -20,6 +20,10 @@
             {
                 "url": "http://localhost:8001/api",
                 "description": "My API Documentation Local"
+            },
+            {
+                "url": "https://server-final-project-node.herokuapp.com/api",
+                "description": "My API Documentation PRD"
             }
         ],
         "security": [
