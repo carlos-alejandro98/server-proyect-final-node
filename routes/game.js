@@ -150,7 +150,7 @@ router.get("/game/detailsGame/:slug", readGame);
 /**
  * @swagger
  * /game/updateGame/{game}:
- *   post:
+ *   put:
  *     summary: Update Game
  *     tags:
  *       - name: "Game"
